@@ -71,7 +71,7 @@ def write_arff(path, file, features):
     for row in range(0, len(features)):
         str = ""
         for col in range(0, len(features[0])):
-            str += "%f, "%(features[row][col])
+            str += "%f,"%(features[row][col])
         f.write("%s\n" % str[:-2])
 
     f.close()
@@ -89,15 +89,21 @@ def convert(path, dirname, featpath, featstatspath, featmovstatspath, featcombst
             stats = MFStats(mf)
 
             mfeat = np.reshape(mf, (mf.shape[0], mf.shape[1] * mf.shape[2]))
+            r = np.arange(0, 300.04, 0.04)
+            r = np.reshape(r, (len(r),1))
+            mfeat = np.concatenate((r, mfeat), axis=1)
             write_arff(featpath, "%s%s"%(file[:-4], ".arff"), mfeat)
 
             mfeatstats = stats.get_stats()
+            mfeatstats = np.concatenate((r, mfeatstats), axis=1)
             write_arff(featstatspath, "%s%s"%(file[:-4], ".arff"), mfeatstats)
 
             mfeatmovstats = stats.moving_stats(mfeat, 10)
+            mfeatmovstats = np.concatenate((r, mfeatmovstats), axis=1)
             write_arff(featmovstatspath, "%s%s"%(file[:-4], ".arff"), mfeatmovstats)
 
             mfeatcombstats = stats.moving_stats(mfeatstats, 10)
+            mfeatcombstats = np.concatenate((r, mfeatcombstats), axis=1)
             write_arff(featcombstatspath, "%s%s"%(file[:-4], ".arff"), mfeatcombstats)
 
 # Windows
@@ -107,10 +113,10 @@ pathfeatmovstats = 'F:/AVEC/mf_features_movstats'
 pathfeatcombstats = 'F:/AVEC/mf_features_combstats'
 
 # Mac
-pathfeat = '../../output/mf_features'
-pathfeatstats = '../../output/mf_features_stats'
-pathfeatmovstats = '../../output/mf_features_movstats'
-pathfeatcombstats = '../../output/mf_features_combstats'
+#pathfeat = '../../output/mf_features'
+#pathfeatstats = '../../output/mf_features_stats'
+#pathfeatmovstats = '../../output/mf_features_movstats'
+#pathfeatcombstats = '../../output/mf_features_combstats'
 
 listfolders(pathfeat, pathfeatstats, pathfeatmovstats, pathfeatcombstats)
 
