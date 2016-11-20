@@ -121,16 +121,16 @@ def convert(path, dirname, featpath, featstatspath, featmovstatspath, featcombst
     shutil.copytree(featcombstatspath, "%s/../valence"(featcombstatspath))
 
 # Windows
-#pathfeat = 'F:/AVEC/mf_features'
-#pathfeatstats = 'F:/AVEC/mf_features_stats'
-#pathfeatmovstats = 'F:/AVEC/mf_features_movstats'
-#pathfeatcombstats = 'F:/AVEC/mf_features_combstats'
+pathfeat = 'F:/AVEC/mf_features'
+pathfeatstats = 'F:/AVEC/mf_features_stats'
+pathfeatmovstats = 'F:/AVEC/mf_features_movstats'
+pathfeatcombstats = 'F:/AVEC/mf_features_combstats'
 
 # Mac
-pathfeat = '../../output/mf_features'
-pathfeatstats = '../../output/mf_features_stats'
-pathfeatmovstats = '../../output/mf_features_movstats'
-pathfeatcombstats = '../../output/mf_features_combstats'
+#pathfeat = '../../output/mf_features'
+#pathfeatstats = '../../output/mf_features_stats'
+#pathfeatmovstats = '../../output/mf_features_movstats'
+#pathfeatcombstats = '../../output/mf_features_combstats'
 
 listfolders(pathfeat, pathfeatstats, pathfeatmovstats, pathfeatcombstats)
 
