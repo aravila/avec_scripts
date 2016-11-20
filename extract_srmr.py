@@ -84,7 +84,10 @@ def convert(path, dirname, featpath, featstatspath, featmovstatspath, featcombst
     for file in dirs:
         if file.endswith('.wav'):
             print('%s/%s' % (path, file))
-            mf = audio.srmr_audio(path, file)
+            if dirname == "":
+                mf = audio.srmr_audio(path, file)
+            else:
+                mf = audio.srmr_audio("%s/%s" % (path, dirname), file)
             mf = np.einsum('ijk->kij', mf)
             mf = get_no_examples(mf,7501)
             stats = MFStats(mf)
@@ -94,8 +97,8 @@ def convert(path, dirname, featpath, featstatspath, featmovstatspath, featcombst
 
             mfeat = np.reshape(mf, (mf.shape[0], mf.shape[1] * mf.shape[2]))
             mfeat = np.concatenate((r, mfeat), axis=1)
-            np.savetxt('%s/test.txt'%(featpath), mfeat, delimiter=',')
             write_arff(featpath, "%s%s"%(file[:-4], ".arff"), mfeat)
+            np.savetxt('%s/test.txt'%(featpath), mfeat, delimiter=',')
 
             mfeatstats = stats.get_stats()
             mfeatstats = mfeatstats[0:7501][:]
@@ -118,16 +121,16 @@ def convert(path, dirname, featpath, featstatspath, featmovstatspath, featcombst
     shutil.copytree(featcombstatspath, "%s/../valence"(featcombstatspath))
 
 # Windows
-pathfeat = 'F:/AVEC/mf_features'
-pathfeatstats = 'F:/AVEC/mf_features_stats'
-pathfeatmovstats = 'F:/AVEC/mf_features_movstats'
-pathfeatcombstats = 'F:/AVEC/mf_features_combstats'
+#pathfeat = 'F:/AVEC/mf_features'
+#pathfeatstats = 'F:/AVEC/mf_features_stats'
+#pathfeatmovstats = 'F:/AVEC/mf_features_movstats'
+#pathfeatcombstats = 'F:/AVEC/mf_features_combstats'
 
 # Mac
-#pathfeat = '../../output/mf_features'
-#pathfeatstats = '../../output/mf_features_stats'
-#pathfeatmovstats = '../../output/mf_features_movstats'
-#pathfeatcombstats = '../../output/mf_features_combstats'
+pathfeat = '../../output/mf_features'
+pathfeatstats = '../../output/mf_features_stats'
+pathfeatmovstats = '../../output/mf_features_movstats'
+pathfeatcombstats = '../../output/mf_features_combstats'
 
 listfolders(pathfeat, pathfeatstats, pathfeatmovstats, pathfeatcombstats)
 
