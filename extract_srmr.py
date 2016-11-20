@@ -94,20 +94,21 @@ def convert(path, dirname, featpath, featstatspath, featmovstatspath, featcombst
 
             mfeat = np.reshape(mf, (mf.shape[0], mf.shape[1] * mf.shape[2]))
             mfeat = np.concatenate((r, mfeat), axis=1)
+            np.savetxt('%s/test.txt'%(featpath), mfeat, delimiter=',')
             write_arff(featpath, "%s%s"%(file[:-4], ".arff"), mfeat)
 
             mfeatstats = stats.get_stats()
-            mfeatmovstats = mfeatmovstats[0:7501]
+            mfeatstats = mfeatstats[0:7501][:]
             mfeatstats = np.concatenate((r, mfeatstats), axis=1)
             write_arff(featstatspath, "%s%s"%(file[:-4], ".arff"), mfeatstats)
 
             mfeatmovstats = stats.moving_stats(mfeat, 10)
-            mfeatmovstats = mfeatmovstats[0:7501]
+            mfeatmovstats = mfeatmovstats[0:7501][:]
             mfeatmovstats = np.concatenate((r, mfeatmovstats), axis=1)
             write_arff(featmovstatspath, "%s%s"%(file[:-4], ".arff"), mfeatmovstats)
 
             mfeatcombstats = stats.moving_stats(mfeatstats, 10)
-            mfeatcombstats = mfeatcombstats[0:7501]
+            mfeatcombstats = mfeatcombstats[0:7501][:]
             mfeatcombstats = np.concatenate((r, mfeatcombstats), axis=1)
             write_arff(featcombstatspath, "%s%s"%(file[:-4], ".arff"), mfeatcombstats)
 
@@ -117,16 +118,16 @@ def convert(path, dirname, featpath, featstatspath, featmovstatspath, featcombst
     shutil.copytree(featcombstatspath, "%s/../valence"(featcombstatspath))
 
 # Windows
-pathfeat = 'F:/AVEC/mf_features'
-pathfeatstats = 'F:/AVEC/mf_features_stats'
-pathfeatmovstats = 'F:/AVEC/mf_features_movstats'
-pathfeatcombstats = 'F:/AVEC/mf_features_combstats'
+#pathfeat = 'F:/AVEC/mf_features'
+#pathfeatstats = 'F:/AVEC/mf_features_stats'
+#pathfeatmovstats = 'F:/AVEC/mf_features_movstats'
+#pathfeatcombstats = 'F:/AVEC/mf_features_combstats'
 
 # Mac
-#pathfeat = '../../output/mf_features'
-#pathfeatstats = '../../output/mf_features_stats'
-#pathfeatmovstats = '../../output/mf_features_movstats'
-#pathfeatcombstats = '../../output/mf_features_combstats'
+pathfeat = '../../output/mf_features'
+pathfeatstats = '../../output/mf_features_stats'
+pathfeatmovstats = '../../output/mf_features_movstats'
+pathfeatcombstats = '../../output/mf_features_combstats'
 
 listfolders(pathfeat, pathfeatstats, pathfeatmovstats, pathfeatcombstats)
 
