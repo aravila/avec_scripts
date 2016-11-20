@@ -95,26 +95,26 @@ def convert(path, dirname, featpath, featstatspath, featmovstatspath, featcombst
             mfeat = np.reshape(mf, (mf.shape[0], mf.shape[1] * mf.shape[2]))
             mfeat = np.concatenate((r, mfeat), axis=1)
             write_arff(featpath, "%s%s"%(file[:-4], ".arff"), mfeat)
-            shutil.copytree(featpath, "%s/../valence"(featpath))
 
             mfeatstats = stats.get_stats()
             mfeatmovstats = mfeatmovstats[0:7501]
             mfeatstats = np.concatenate((r, mfeatstats), axis=1)
             write_arff(featstatspath, "%s%s"%(file[:-4], ".arff"), mfeatstats)
-            shutil.copytree(featstatspath, "%s/../valence"(featstatspath))
 
             mfeatmovstats = stats.moving_stats(mfeat, 10)
             mfeatmovstats = mfeatmovstats[0:7501]
             mfeatmovstats = np.concatenate((r, mfeatmovstats), axis=1)
             write_arff(featmovstatspath, "%s%s"%(file[:-4], ".arff"), mfeatmovstats)
-            shutil.copytree(featmovstatspath, "%s/../valence"(featmovstatspath))
 
             mfeatcombstats = stats.moving_stats(mfeatstats, 10)
             mfeatcombstats = mfeatcombstats[0:7501]
             mfeatcombstats = np.concatenate((r, mfeatcombstats), axis=1)
             write_arff(featcombstatspath, "%s%s"%(file[:-4], ".arff"), mfeatcombstats)
-            shutil.copytree(featcombstatspath, "%s/../valence"(featcombstatspath))
 
+    shutil.copytree(featpath, "%s/../valence"(featpath))
+    shutil.copytree(featstatspath, "%s/../valence"(featstatspath))
+    shutil.copytree(featmovstatspath, "%s/../valence"(featmovstatspath))
+    shutil.copytree(featcombstatspath, "%s/../valence"(featcombstatspath))
 
 # Windows
 pathfeat = 'F:/AVEC/mf_features'
