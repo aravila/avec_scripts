@@ -6,7 +6,7 @@ Before using this scripts, intall the python implementation of SRMR which can be
 
 # Usage
 
-After installing SRMR and its dependencies, a quick test can be done by entering the script folder and executing the following command:
+After installing the SRMR toolbox, a quick test can be done by entering the script folder and executing the following command:
 
 python modspec_avec.py ./wav ./features 0 3 20
 
