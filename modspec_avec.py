@@ -30,7 +30,7 @@ def listfolders():
             pooling_1_dir = "%s/%s/%s%d" % (pathout, dirname, "mrs+pooling+", poolingsize)
             pooling_2_dir = "%s/%s/%s%d" % (pathout, dirname, "msf+pooling+", poolingsize)
             print("ftype has been defined as : %s", ftype)
-            convert(pathin, dirname, mrs_dir, msf_dir, pooling_1_dir, pooling_2_dir, pad, ftype, poolingsize)
+            pool_msr(pathin, dirname, mrs_dir, msf_dir, pooling_1_dir, pooling_2_dir, pad, ftype, poolingsize)
 
 
 def write_file(path, file, features, ftype):
@@ -86,7 +86,7 @@ def get_no_examples(mf, no_examples):
         mf = mf[0:no_examples]
     return mf
 
-def convert(path, dirname, mrs_dir, msf_dir, pooling_1_dir, pooling_2_dir, pad = 0, ftype = 3, poolingsize = 10):
+def pool_msr(path, dirname, mrs_dir, msf_dir, pooling_1_dir, pooling_2_dir, pad = 0, ftype = 3, poolingsize = 10):
     dirs = os.listdir("%s/%s"%(path, dirname))
     for file in dirs:
         if file.endswith('.wav'):
