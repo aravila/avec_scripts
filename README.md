@@ -17,7 +17,7 @@ param1: path containing list of folders with wav files
 
 param2: path where the features will be generated
 
-param3: 78 (zero padding in ms to align windows with target framstep)
+param3: 78 (zero padding in ms)
 
 param4: file type (1 - .arff, 2 - .h5, 3 - .csv)
 
